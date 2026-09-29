@@ -2,40 +2,52 @@ import streamlit as st
 import pandas as pd
 import sqlite3
 import pdfplumber
+import streamlit.components.v1 as components
 
 # Configuración de la página
 st.set_page_config(page_title="Sistema de Liquidación de IVA y Clientes", layout="wide")
 
+
+
 # ---------------------------------------------------------
-# Ocultar marca de agua, menú e íconos de GitHub/Streamlit
+# Ocultar insignias flotantes "Hosted with Streamlit" y "Created by"
 # ---------------------------------------------------------
-ocultar_estilos_streamlit = """
+ocultar_badges = """
     <style>
-    /* Ocultar encabezados, barras de herramientas y menús */
+    /* Ocultar elementos nativos de Streamlit */
     #MainMenu {visibility: hidden !important;}
     header {visibility: hidden !important; display: none !important;}
     footer {visibility: hidden !important; display: none !important;}
     
-    /* Selectores específicos de Streamlit Cloud */
     [data-testid="stHeader"] {display: none !important;}
     [data-testid="stToolbar"] {display: none !important;}
-    [data-testid="stDecoration"] {display: none !important;}
-    [data-testid="stStatusWidget"] {display: none !important;}
     [data-testid="stFooter"] {display: none !important;}
     
-    /* Contenedores de botones y marcas de agua inferiores */
+    /* Ocultar la insignia flotante inferior ("Hosted with Streamlit" / "Created by") */
+    .stAppBadge {display: none !important; visibility: hidden !important;}
+    .viewerBadge_container__1S-5D {display: none !important;}
     div[class*="viewerBadge"] {display: none !important;}
     div[class*="styles_viewerBadge"] {display: none !important;}
-    .stApp > footer {display: none !important;}
-    .stAppHeader {display: none !important;}
+    div[class*="stAppBadge"] {display: none !important;}
+    iframe[title="st.iframe"] {display: none !important;}
+    a[href*="streamlit.io"] {display: none !important;}
     
-    /* Ajuste para que el contenido ocupe toda la pantalla superior */
-    .stApp {
-        margin-top: -60px !important;
-    }
+    /* Ocultar contenedor flotante fijo abajo a la derecha */
+    div[data-style="aria-aria-live"] {display: none !important;}
     </style>
+    
+    <script>
+    // Script auxiliar para remover el elemento flotante del DOM del servidor
+    function removerBadge() {
+        const badges = window.parent.document.querySelectorAll('div[class*="viewerBadge"], .stAppBadge, a[href*="streamlit.io"]');
+        badges.forEach(b => b.style.display = 'none');
+    }
+    setInterval(removerBadge, 500);
+    </script>
 """
-st.markdown(ocultar_estilos_streamlit, unsafe_allow_html=True)
+
+# Inyectar estilos en la app
+st.markdown(ocultar_badges, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
 # Conexión a Base de Datos (SQLite)
