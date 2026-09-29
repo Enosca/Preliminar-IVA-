@@ -7,19 +7,32 @@ import pdfplumber
 st.set_page_config(page_title="Sistema de Liquidación de IVA y Clientes", layout="wide")
 
 # ---------------------------------------------------------
-# Ocultar marca de agua, menú e íconos de GitHub en celulares
+# Ocultar marca de agua, menú e íconos de GitHub/Streamlit
 # ---------------------------------------------------------
 ocultar_estilos_streamlit = """
     <style>
-    #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
-    .stAppHeader {display: none !important;}
+    /* Ocultar encabezados, barras de herramientas y menús */
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important; display: none !important;}
+    footer {visibility: hidden !important; display: none !important;}
+    
+    /* Selectores específicos de Streamlit Cloud */
     [data-testid="stHeader"] {display: none !important;}
-    [data-testid="stFooter"] {display: none !important;}
     [data-testid="stToolbar"] {display: none !important;}
-    .viewerBadge_container__1S-5D {display: none !important;}
+    [data-testid="stDecoration"] {display: none !important;}
+    [data-testid="stStatusWidget"] {display: none !important;}
+    [data-testid="stFooter"] {display: none !important;}
+    
+    /* Contenedores de botones y marcas de agua inferiores */
+    div[class*="viewerBadge"] {display: none !important;}
+    div[class*="styles_viewerBadge"] {display: none !important;}
     .stApp > footer {display: none !important;}
+    .stAppHeader {display: none !important;}
+    
+    /* Ajuste para que el contenido ocupe toda la pantalla superior */
+    .stApp {
+        margin-top: -60px !important;
+    }
     </style>
 """
 st.markdown(ocultar_estilos_streamlit, unsafe_allow_html=True)
