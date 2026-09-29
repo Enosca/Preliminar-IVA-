@@ -7,14 +7,17 @@ import pdfplumber
 st.set_page_config(page_title="Sistema de Liquidación de IVA y Clientes", layout="wide")
 
 # ---------------------------------------------------------
-# Ocultar marca de agua, menú de Streamlit e íconos de GitHub
+# Ocultar marca de agua, menú e íconos de GitHub en celulares
 # ---------------------------------------------------------
 ocultar_estilos_streamlit = """
     <style>
     #MainMenu {visibility: hidden;}
     header {visibility: hidden;}
     footer {visibility: hidden;}
-    .stAppHeader {display: none;}
+    .stAppHeader {display: none !important;}
+    [data-testid="stHeader"] {display: none !important;}
+    [data-testid="stFooter"] {display: none !important;}
+    [data-testid="stToolbar"] {display: none !important;}
     .viewerBadge_container__1S-5D {display: none !important;}
     .stApp > footer {display: none !important;}
     </style>
