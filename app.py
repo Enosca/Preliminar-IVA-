@@ -7,6 +7,21 @@ import pdfplumber
 st.set_page_config(page_title="Sistema de Liquidación de IVA y Clientes", layout="wide")
 
 # ---------------------------------------------------------
+# Ocultar marca de agua, menú de Streamlit e íconos de GitHub
+# ---------------------------------------------------------
+ocultar_estilos_streamlit = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stAppHeader {display: none;}
+    .viewerBadge_container__1S-5D {display: none !important;}
+    .stApp > footer {display: none !important;}
+    </style>
+"""
+st.markdown(ocultar_estilos_streamlit, unsafe_allow_html=True)
+
+# ---------------------------------------------------------
 # Conexión a Base de Datos (SQLite)
 # ---------------------------------------------------------
 CONN = sqlite3.connect("iva_datos.db", check_same_thread=False)
